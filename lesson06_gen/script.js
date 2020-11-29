@@ -20,17 +20,14 @@ const consolePrompt = (str) => {
     return prompt(str);
 }
 
-let isNumber = (n) => !isNaN(parseFloat(n)) && isFinite(n);
-//варианты функции
-// var isNumber = function isNumber(value) {
-//    return typeof value === 'number' && isFinite(value);
-// }
+//функция проверки на введенное число
+const isNumber = n => !isNaN(parseFloat(n)) && isFinite(n);
 
+//функция генерирует случайное целое число от MIN до MAX
 const randomInteger = () => {
     const MIN = 1;
     const MAX = 100;
     let result = Math.floor((MAX * Math.random()) + MIN);
-    // console.log('debug result: ', result);
     return result;
 };
 
@@ -40,12 +37,7 @@ const main = () => {
     const seed = randomInteger(); //генерим загаданое число - это сохранится в замыкании функции
 
     const next = () => {
-        
-        // console.log('Угадайте число от 1 до 100');
-        // let ans = prompt('Угадайте число от 1 до 100'); //Ответ пользователя
-
         let ans = consolePrompt('Угадай число от 1 до 100');
-
         console.log('Ответ пользователя: ', ans);
 
         if (ans === null) {
@@ -60,12 +52,10 @@ const main = () => {
         } else if (seed < ans) {
             consoleAlert('Загаданное число меньше << ' + ans);
         } else if (seed > ans) {
-            // console.log('Загаданное число БОЛЬШЕ >>');
-            // alert('Загаданное число БОЛЬШЕ >>');
             consoleAlert('Загаданное число БОЛЬШЕ >> ' + ans);
         } else if (seed === ans ) {
             consoleAlert('Поздравляю, Вы угадали УРААААА!!!!\nЗагаданное число ' + ans);
-            return;//выход из функции
+            return;//выход из функции конец игры
         };
         next(); //следующий запуск итеррации рекурсии
     };
@@ -76,3 +66,4 @@ const main = () => {
 
 const play = main(); //генерация замыкания в функции
 play(); //по сути наша функция next()
+
